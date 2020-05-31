@@ -1,5 +1,7 @@
 package question2;
 
+
+
 import question1.PilePleineException;
 import question1.PileVideException;
 
@@ -50,8 +52,9 @@ public class Pile4 implements PileI, Cloneable {
 	public Pile4(int taille) {
 		if (taille <= 0)
 			taille = CAPACITE_PAR_DEFAUT;
-		this.stk = null;
+		this.stk = new Maillon(null,null);
 		this.capacite = taille;
+		this.nombre = 0;
 	}
 
 	public Pile4() {
@@ -61,20 +64,30 @@ public class Pile4 implements PileI, Cloneable {
 	public void empiler(Object o) throws PilePleineException {
 		if (estPleine())
 			throw new PilePleineException();
-		// à compléter
+		
+		
+		    Maillon stk1 = stk;
+		    
+		    stk.element = o;
+		    stk.suivant = stk1;
+		    nombre++;
+                
 	}
 
 	public Object depiler() throws PileVideException {
 		if (estVide())
 			throw new PileVideException();
 		// à compléter
-		return null;
+		Object elem = stk.element;
+		stk = stk.suivant();
+		this.nombre--;
+		return elem;
 	}
 
 	public Object sommet() throws PileVideException {
 		if (estVide())
 			throw new PileVideException();
-		return null; // à compléter
+		return stk.element;
 	}
 
 	/**
@@ -83,8 +96,9 @@ public class Pile4 implements PileI, Cloneable {
 	 * @return vrai si la pile est vide, faux autrement
 	 */
 	public boolean estVide() {
-		return false; // à compléter
-	}
+		if (stk.element == null && this.nombre == 0) return true;
+                return false;	
+}
 
 	/**
 	 * Effectue un test de l'état de la pile.
@@ -92,8 +106,9 @@ public class Pile4 implements PileI, Cloneable {
 	 * @return vrai si la pile est pleine, faux autrement
 	 */
 	public boolean estPleine() {
-		return false; // à compléter
-	}
+		if (this.nombre == capacite) return true; // à compléter
+                return false;	
+}
 
 	/**
 	 * Retourne une représentation en String d'une pile, contenant la
@@ -102,18 +117,54 @@ public class Pile4 implements PileI, Cloneable {
 	 * @return une représentation en String d'une pile
 	 */
 	public String toString() {
-
-		String s = "[";
-		// à compléter
-		return s + "]";
+//TO REVIEW
+	    StringBuffer sb = new StringBuffer("[");
+	    while(stk.element != null && stk.suivant() != null){
+	        
+	           sb.append(stk.element);
+	          stk = stk.suivant();
+	           
+	               sb.append(", ");
+	       
+	    }
+	    sb.append("]");
+	       
+	    return sb.toString();
+	    ///////////////////////////////////////////////////////////////////
+	    
+	    
+	    
+		//StringBuffer sb = new StringBuffer("[");
+              //  for(int i = taille()-1 ; i >= 0 ; i--){
+                  //  if(stk.suivant() != null){
+                    
+                   //     sb.append(stk.element);
+                    
+                   //     stk = stk.suivant();
+                  //      if (i > 0)
+                  //          sb.append(", ");
+                  //  }
+               // } 		
+		// sb.append("]");
+                // return sb.toString();
 	}
 
 	public boolean equals(Object o) {
-		if (o instanceof Pile4) {
-			// à compléter
-			return false;
-		}
-		return false;
+		
+			
+		 	 if(this.capacite() ==(int) ((PileI)o).capacite()){
+                               if(this.taille() == (int) ((PileI)o).taille()){
+                                     if(this.toString().equals((String) ((PileI)o).toString() )){
+                                            return true;
+                                     }else{ return false;}
+                               }else{
+                                      return false;
+                               }
+                          }else{
+                                return false;
+                          }
+		 
+		
 	}
 
 	public int capacite() {

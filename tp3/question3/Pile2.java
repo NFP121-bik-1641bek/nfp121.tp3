@@ -6,32 +6,69 @@ import question1.PileVideException;
 import java.util.Stack;
 
 public class Pile2<T> implements PileI<T>{
-    /** par délégation : utilisation de la class Stack */
+    
     private Stack<T> stk;
-    /** la capacité de la pile */
-    private int capacité;
+    
+    private int capacite;
 
+    private int ptr;
+    
+    
     /** Création d'une pile.
      * @param taille la "taille maximale" de la pile, doit être > 0
      */
     public Pile2(int taille){
-        // à compléter
+         stk = new Stack<T>();
+        if(taille <=0) capacite = CAPACITE_PAR_DEFAUT;
+        else {capacite = taille;}
+        ptr = 0;
     }
 
     public Pile2(){
-        // à compléter
+       this(0);
     }
-
+    public boolean estPleine(){
+     if (ptr == capacite) return true;
+        
+        return false;
+    
+    }
+    
+    public boolean estVide(){
+    return stk.empty();
+    
+    }
+    
+    public int taille(){
+    
+    return this.stk.size();
+    
+    
+    }
+    
+    public int capacite(){
+    
+    return this.capacite;
+    
+    }
+    
     public void empiler(T o) throws PilePleineException{
-        // à compléter
+        if (estPleine())
+            throw new PilePleineException();
+        this.stk.push(o);
+        this.ptr++;
     }
 
     public T depiler() throws PileVideException{
-        // à compléter
+      if (estVide())
+            throw new PileVideException();
+        this.ptr--;
+        return this.stk.pop();
     }
 
     public T sommet() throws PileVideException{
-        // à compléter
+         if(estVide()) throw new PileVideException();
+        return this.stk.peek();
     }
 
     // recopier ici toutes les autres méthodes

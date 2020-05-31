@@ -8,8 +8,8 @@ import java.util.Vector;
 /**
  * Décrivez votre classe PileVector ici.
  * 
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author Remy Zakarian
+ * @version 1.0
  */
 public class Pile3 implements PileI {
 
@@ -22,50 +22,85 @@ public class Pile3 implements PileI {
 	public Pile3(int taille) {
 		// traiter le cas <=0
 		// à compléter
+		
+                if(taille <=0) v = new Vector<Object>(CAPACITE_PAR_DEFAUT);
+                else {v = new Vector<Object>(taille);}
+                
+		
+		
+		
 	}
 
 	public void empiler(Object o) throws PilePleineException {
 		// à compléter
+		if (estPleine())
+                    throw new PilePleineException();
+                this.v.add(o);
 	}
 
 	public Object depiler() throws PileVideException {
 		// à compléter
-		return null;
+		  if (estVide())
+                      throw new PileVideException();
+                     
+                      Object last = v.elementAt(v.size()-1);
+                      v.remove(v.size()-1);
+                      return last;
+        
 	}
 
 	public Object sommet() throws PileVideException {
-		// à compléter
-		return null;
+		if(estVide()) throw new PileVideException();
+		return v.elementAt(v.size()-1);
 	}
 
 	public int taille() {
-		// à compléter
-		return -1;
+		
+		return v.size();
 	}
 
 	public int capacite() {
-		// à compléter
-		return -1;
+		
+		return v.capacity();
 	}
 
 	public boolean estVide() {
-		// à compléter
-		return false;
+		
+		return v.isEmpty();
 	}
 
 	public boolean estPleine() {
-		// à compléter
+		
+		if (v.size() == v.capacity()) return true;
 		return false;
+		
 	}
 
 	public String toString() {
 		// à compléter
-		return "";
+		 StringBuffer sb = new StringBuffer("[");
+                 for (int i = v.size() - 1; i >= 0; i--) {
+                    sb.append(this.v.elementAt(i).toString());
+                    if (i > 0)
+                    sb.append(", ");
+                 }
+                 sb.append("]");
+                 return sb.toString();
 	}
 
 	public boolean equals(Object o) {
 		// à compléter
-		return false;
+		 if(this.capacite() ==(int) ((PileI)o).capacite()){
+            if(this.taille() == (int) ((PileI)o).taille()){
+                if(this.toString().equals((String) ((PileI)o).toString() )){
+                    return true;
+                }else{ return false;}
+            }else{
+                 return false;
+            }
+        }else{
+            return false;
+        }
 	}
 
 	// fonction fournie
