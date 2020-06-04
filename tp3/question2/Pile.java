@@ -30,8 +30,12 @@ public class Pile implements PileI {
     public void empiler(Object o) throws PilePleineException {
         if (estPleine())
             throw new PilePleineException();
-        this.zone[this.ptr] = o;
-        this.ptr++;
+        if(o == null || o.equals(null)){
+            
+        }else{
+            this.zone[this.ptr] = o;
+            this.ptr++;
+        }
     }
 
     public Object depiler() throws PileVideException {
@@ -69,19 +73,20 @@ public class Pile implements PileI {
     }
 
     public boolean equals(Object o) {
-        // a completer
+        if(o instanceof PileI){
         if(this.capacite() ==(int) ((PileI)o).capacite()){
             if(this.taille() == (int) ((PileI)o).taille()){
                 if(this.toString().equals((String) ((PileI)o).toString() )){
                     return true;
-                }else{ return false;}
-            }else{
-                 return false;
+                } return false;
             }
-        }else{
+                 return false;
+            
+        }
             return false;
         }
-    }
+     return false;
+}
 
     // fonction fournie
     public int hashCode() {

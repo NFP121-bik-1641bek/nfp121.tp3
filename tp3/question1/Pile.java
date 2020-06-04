@@ -30,11 +30,15 @@ public class Pile {
         this(TAILLE_PAR_DEFAUT);
     }
 
-    public void empiler(Object i) throws PilePleineException {
+    public void empiler(Object i) throws PilePleineException, NullPointerException {
         if (estPleine())
             throw new PilePleineException();
+        if(i == null || i.equals(null)){
+           
+        }else{
         this.zone[this.ptr] = i;
         this.ptr++;
+        }
     }
 
     public Object depiler() throws PileVideException {
@@ -51,6 +55,19 @@ public class Pile {
     public boolean estPleine() {
         return ptr == zone.length;
     }
+    
+    
+        public int capacite() {
+        
+        return zone.length;
+    }
+
+    public int taille() {
+        
+        return ptr ;
+    }
+    
+    
 
     public String toString() {
         StringBuffer sb = new StringBuffer("[");

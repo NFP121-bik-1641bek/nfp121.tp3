@@ -55,8 +55,14 @@ public class Pile2<T> implements PileI<T>{
     public void empiler(T o) throws PilePleineException{
         if (estPleine())
             throw new PilePleineException();
+        if(o == null || o.equals(null)){
+           
+        }else{
+            
+            
         this.stk.push(o);
         this.ptr++;
+       }
     }
 
     public T depiler() throws PileVideException{
@@ -71,6 +77,25 @@ public class Pile2<T> implements PileI<T>{
         return this.stk.peek();
     }
 
+    
+        public String toString() {
+        String s = "[";
+        // a completer
+        
+        Object arr[] = stk.toArray();
+        StringBuffer sb = new StringBuffer();
+        for(int i = arr.length - 1 ; i >=0 ; i--){
+            sb.append(arr[i].toString());
+            if (i > 0)
+                sb.append(", ");
+        
+        }
+        s = s + sb;
+        return s + "]";
+    }
+    
+    
+    
     // recopier ici toutes les autres méthodes
     // qui ne sont pas modifiées en fonction
     // du type des éléments de la pile

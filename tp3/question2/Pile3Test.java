@@ -57,54 +57,54 @@ public class Pile3Test extends junit.framework.TestCase {
 
 	
 	public void test_Pile_capacite() {
-        assertEquals(PileI.CAPACITE_PAR_DEFAUT, p1.capacite());
-    }
-    
-    
-      public void test_Pile_estPleine() throws Exception {
-        PileI p = new question2.Pile3(3);
-        p.empiler(3);
-        assertEquals(1, p.taille());
-        p.empiler(2);
-        assertEquals(2, p.taille());
-        p.empiler(1);
-        assertEquals(3, p.taille());
-
-        assertEquals(true, p.estPleine());
-        assertEquals(p.taille(), p.capacite());
-        try {
-            p.empiler(0);
-            fail();
-        } catch (Exception e) {
-            assertTrue(e instanceof question1.PilePleineException);
+            assertEquals(PileI.CAPACITE_PAR_DEFAUT, p1.capacite());
         }
-    }
     
     
-    
-      public void test_Pile_sommet() throws Exception {
-        PileI p = new question2.Pile3(3);
-        assertEquals(true, p.estVide());
+        public void test_Pile_estPleine() throws Exception {
+            PileI p = new question2.Pile3(3);
+            p.empiler(3);
+            assertEquals(1, p.taille());
+            p.empiler(2);
+            assertEquals(2, p.taille());
+            p.empiler(1);
+            assertEquals(3, p.taille());
 
-        p.empiler(new Integer(3));
-        assertEquals(" sommet ?? ", new Integer(3), p.sommet());
-        assertEquals(1, p.taille());
-        assertEquals(" depiler ?? ", new Integer(3), p.depiler());
-        assertEquals(0, p.taille());
-    }
+            assertEquals(true, p.estPleine());
+            assertEquals(p.taille(), p.capacite());
+            try {
+                p.empiler(0);
+                fail();
+            } catch (Exception e) {
+                assertTrue(e instanceof question1.PilePleineException);
+            }
+        }
+    
+    
+    
+        public void test_Pile_sommet() throws Exception {
+            PileI p = new question2.Pile3(3);
+            assertEquals(true, p.estVide());
+
+            p.empiler(new Integer(3));
+            assertEquals(" sommet ?? ", new Integer(3), p.sommet());
+            assertEquals(1, p.taille());
+            assertEquals(" depiler ?? ", new Integer(3), p.depiler());
+            assertEquals(0, p.taille());
+        }
     
     
     
         public void test_Pile_estVide() throws Exception {
-        PileI p = new question2.Pile3(3);
-        assertEquals(true, p.estVide());
-        try {
-            Object r = p.depiler();
-            fail();
-        } catch (Exception e) {
-            assertTrue(e instanceof question1.PileVideException);
-        }
-    }
+          PileI p = new question2.Pile3(3);
+          assertEquals(true, p.estVide());
+          try {
+              Object r = p.depiler();
+              fail();
+          } catch (Exception e) {
+               assertTrue(e instanceof question1.PileVideException);
+          }
+        }  
     
     
        public void test_Pile_toString() throws Exception {
@@ -121,11 +121,11 @@ public class Pile3Test extends junit.framework.TestCase {
     
     
     
-	  public void test_Pile_TailleNegative() {
-        PileI p = new question2.Pile3(-3);
-        assertEquals(p.CAPACITE_PAR_DEFAUT, p.capacite());
+        public void test_Pile_TailleNegative() {
+          PileI p = new question2.Pile3(-3);
+          assertEquals(p.CAPACITE_PAR_DEFAUT, p.capacite());
 
-    }
+        }
 
     public void test_Pile_equals() throws Exception {
 
@@ -143,6 +143,8 @@ public class Pile3Test extends junit.framework.TestCase {
 
         p2.empiler(1);
         assertFalse("égalité de deux piles ? ", p1.equals(p2));
+        assertFalse("Egalite d'une pile et autre chose ? ", p1.equals(2));
+        assertFalse("Egalite d'une pile et un autre objet ? ",p2.equals("un String"));
 
     }
 	
@@ -155,7 +157,16 @@ public class Pile3Test extends junit.framework.TestCase {
 	
 	
 	
-	
+	  public void test_Pile_entrer_null() throws Exception{
+        PileI pileavecnull = new question2.Pile3(2);
+        pileavecnull.empiler(null);
+        pileavecnull.empiler(null);
+        pileavecnull.empiler(null);
+        pileavecnull.empiler(null);
+        assertTrue("capacite 0? ", pileavecnull.toString().equals("[]"));
+        assertTrue("capacite 0? ", pileavecnull.taille() == 0);
+    
+    }
 	
 	
 	

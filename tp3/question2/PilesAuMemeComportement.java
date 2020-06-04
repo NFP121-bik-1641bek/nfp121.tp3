@@ -172,5 +172,49 @@ public class PilesAuMemeComportement extends junit.framework.TestCase {
         assertEquals(" différence  sur la taille() ?? ",p3.taille(), p4.taille());
 
     }
+    
+    
+    
+    
+        public void test_Pile_entrer_null() throws Exception{
+        PileI pileavecnull = new question2.Pile(2);
+        PileI pileavecnull2 = new question2.Pile2(2);
+        PileI pileavecnull3 = new question2.Pile3(2);
+        PileI pileavecnull4 = new question2.Pile4(2);
+        pileavecnull.empiler(null);
+        pileavecnull.empiler(null);
+        pileavecnull.empiler(null);
+        pileavecnull.empiler(null);
+        
+        pileavecnull2.empiler(null);
+        pileavecnull2.empiler(null);
+        pileavecnull2.empiler(null);
+        pileavecnull2.empiler(null);
+        
+        pileavecnull3.empiler(null);
+        pileavecnull3.empiler(null);
+        pileavecnull3.empiler(null);
+        pileavecnull3.empiler(null);
+        
+        pileavecnull4.empiler(null);
+        pileavecnull4.empiler(null);
+        pileavecnull4.empiler(null);
+        pileavecnull4.empiler(null);
+        
+        assertTrue("capacite 0? ", pileavecnull.toString().equals("[]"));
+        assertTrue("capacite 0? ", pileavecnull.taille() == 0);
+        
+        assertTrue("capacite 0? ", pileavecnull2.toString().equals("[]"));
+        assertTrue("capacite 0? ", pileavecnull2.taille() == 0);
+        
+        assertTrue("capacite 0? ", pileavecnull3.toString().equals("[]"));
+        assertTrue("capacite 0? ", pileavecnull3.taille() == 0);
+        
+        assertTrue("capacite 0? ", pileavecnull4.toString().equals("[]"));
+        assertTrue("capacite 0? ", pileavecnull4.taille() == 0);
+    
+    }
+    
+    
 }
 

@@ -21,7 +21,7 @@ public class PileTest extends junit.framework.TestCase {
         assertEquals(2, p.taille());
         p.empiler(1);
         assertEquals(3, p.taille());
-
+        
         assertEquals(true, p.estPleine());
         assertEquals(p.taille(), p.capacite());
         try {
@@ -88,6 +88,19 @@ public class PileTest extends junit.framework.TestCase {
 
         p2.empiler(1);
         assertFalse("égalité de deux piles ? ", p1.equals(p2));
+        assertFalse("Egalite d'une pile et autre chose ? ", p1.equals(2));
+        assertFalse("Egalite d'une pile et un autre objet ? ",p2.equals("un String"));
 
+    }
+    
+    public void test_Pile_entrer_null() throws Exception{
+        PileI pileavecnull = new question2.Pile(2);
+        pileavecnull.empiler(null);
+        pileavecnull.empiler(null);
+        pileavecnull.empiler(null);
+        pileavecnull.empiler(null);
+        assertTrue("capacite 0? ", pileavecnull.toString().equals("[]"));
+        assertTrue("capacite 0? ", pileavecnull.taille() == 0);
+    
     }
 }

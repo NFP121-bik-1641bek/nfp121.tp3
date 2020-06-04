@@ -10,13 +10,13 @@ import java.util.Stack;
 public class Pile4 implements PileI, Cloneable {
 	/** la liste des Maillons/Elements */
 	private Maillon stk;
-	/** la capacitÃ© de la pile */
+	/** la capacité de la pile */
 	private int capacite;
 	/** le nombre */
 	private int nombre;
 
 	/**
-	 * Classe interne "statique" contenant chaque Ã©lÃ©ment de la chaine c'est une
+	 * Classe interne "statique" contenant chaque élément de la chaine c'est une
 	 * proposition, vous pouvez l'ignorer !
 	 */
 	private static class Maillon implements Cloneable {
@@ -44,10 +44,10 @@ public class Pile4 implements PileI, Cloneable {
 	}
 
 	/**
-	 * CrÃ©ation d'une pile.
+	 * Création d'une pile.
 	 * 
 	 * @param taille
-	 *            la taille de la pile, la taille doit Ãªtre > 0
+	 *            la taille de la pile, la taille doit être > 0
 	 */
 	public Pile4(int taille) {
 		if (taille <= 0)
@@ -64,20 +64,22 @@ public class Pile4 implements PileI, Cloneable {
 	public void empiler(Object o) throws PilePleineException {
 		if (estPleine())
 			throw new PilePleineException();
-		
-		
-		    Maillon stk1 = stk;
+		if(o != null){
+		try{
+		    Maillon stk1 = (Maillon) stk.clone();
 		    
 		    stk.element = o;
 		    stk.suivant = stk1;
 		    nombre++;
-                
-	}
+		    System.out.println(stk.element);
+		    System.out.println(stk.suivant());
+		  }catch(Exception e){}
+	}}
 
 	public Object depiler() throws PileVideException {
 		if (estVide())
 			throw new PileVideException();
-		// Ã  complÃ©ter
+		// à compléter
 		Object elem = stk.element;
 		stk = stk.suivant();
 		this.nombre--;
@@ -91,7 +93,7 @@ public class Pile4 implements PileI, Cloneable {
 	}
 
 	/**
-	 * Effectue un test de l'Ã©tat de la pile.
+	 * Effectue un test de l'état de la pile.
 	 * 
 	 * @return vrai si la pile est vide, faux autrement
 	 */
@@ -101,35 +103,41 @@ public class Pile4 implements PileI, Cloneable {
 }
 
 	/**
-	 * Effectue un test de l'Ã©tat de la pile.
+	 * Effectue un test de l'état de la pile.
 	 * 
 	 * @return vrai si la pile est pleine, faux autrement
 	 */
 	public boolean estPleine() {
-		if (this.nombre == capacite) return true; // Ã  complÃ©ter
+		if (this.nombre == capacite) return true; // à compléter
                 return false;	
 }
 
 	/**
-	 * Retourne une reprÃ©sentation en String d'une pile, contenant la
-	 * reprÃ©sentation en String de chaque Ã©lÃ©ment.
+	 * Retourne une représentation en String d'une pile, contenant la
+	 * représentation en String de chaque élément.
 	 * 
-	 * @return une reprÃ©sentation en String d'une pile
+	 * @return une représentation en String d'une pile
 	 */
 	public String toString() {
 //TO REVIEW
 	    StringBuffer sb = new StringBuffer("[");
-	    while(stk.element != null && stk.suivant() != null){
+	    //while(stk.element != null && stk.suivant() != null){
 	        
-	           sb.append(stk.element);
-	          stk = stk.suivant();
+	    //       sb.append(stk.element);
+	    //       stk = stk.suivant();
 	           
-	               sb.append(", ");
+	    //       sb.append(", ");
 	       
-	    }
+	    //}
+	    
+	    if(stk.element == null) return "[]";
+	    //System.out.println(stk.element);
+	    //System.out.println(stk.suivant().element);
+	    traverse(sb,stk);
+	    
 	    sb.append("]");
-	       
-	    return sb.toString();
+	    return sb.toString();   
+	    
 	    ///////////////////////////////////////////////////////////////////
 	    
 	    
@@ -148,23 +156,37 @@ public class Pile4 implements PileI, Cloneable {
 		// sb.append("]");
                 // return sb.toString();
 	}
+	
+	public void traverse(StringBuffer sb , Maillon a){
+	   
+	   if(a != null && a.suivant()  != null){
+	   
+	       
+	       
+	       sb.append(a.element.toString());
+	       if(a.suivant().element != null){
+	           sb.append(", ");
+	       }
+	       //System.out.println(sb);
+	   
+	       traverse(sb , a.suivant());
+	   
+        }}
 
 	public boolean equals(Object o) {
 		
-			
+			if(o instanceof PileI){
 		 	 if(this.capacite() ==(int) ((PileI)o).capacite()){
                                if(this.taille() == (int) ((PileI)o).taille()){
                                      if(this.toString().equals((String) ((PileI)o).toString() )){
                                             return true;
-                                     }else{ return false;}
-                               }else{
-                                      return false;
-                               }
-                          }else{
-                                return false;
+                                     } return false;}
+                               
                           }
-		 
-		
+                                return false;
+                          
+                        }
+		return false;
 	}
 
 	public int capacite() {
